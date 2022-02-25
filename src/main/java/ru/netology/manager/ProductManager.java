@@ -15,11 +15,13 @@ public class ProductManager {
     public ProductManager() {
         this.repository = new ProductRepository();
     }
-    public void add (Product pr)
-    {
+
+    public void add(Product pr) {
         repository.add(pr);
 
     }
+
+
     public Product[] searchBy(String text) {
         int i = 0;
         Product[] result = new Product[repository.getItemsLength()];// тут будем хранить подошедшие запросу продукты
@@ -29,14 +31,13 @@ public class ProductManager {
                 i++;
             }
         }
-        if (i==0)
-        {
+        if (i == 0) {
             return null;
         }
-            Product[] result1 = new Product[i];
-            for (int a=0; a<=i-1;a++) {
-                result1[a] = result[a];
-            }
+        Product[] result1 = new Product[i];
+        for (int a = 0; a <= i - 1; a++) {
+            result1[a] = result[a];
+        }
         return result1;
 
     }
