@@ -21,21 +21,22 @@ public class ProductManagerTest {
     Product produkt1 = new Product(5, "6", 200);
     Smartphone smartphone = new Smartphone(4, "5", 200, "main");
     ProductRepository repository = new ProductRepository();
+    ProductManager productManager = new ProductManager(repository);
 
     @Test
     void testAddManagerAndNotFindElement() {
-        ProductManager productManager = new ProductManager(repository);
         productManager.add(book);
         productManager.add(book2);
         productManager.add(book1);
         productManager.add(smartphone);
         productManager.add(produkt1);
-        assertNull(productManager.searchBy("0"));
+        Product[] expected=productManager.getResult();
+        assertArrayEquals(expected, productManager.searchBy("0"));
+
     }
 
     @Test
     public void testDeleteElementRepository() {
-        ProductManager productManager = new ProductManager(repository);
         productManager.add(book);
         productManager.add(book2);
         productManager.add(book1);
@@ -48,15 +49,14 @@ public class ProductManagerTest {
 
     @Test
     public void repositoryFindByldNullTest() {
-        ProductManager productManager = new ProductManager(repository);
+
         productManager.add(book1);
         productManager.add(book2);
-        assertNull(repository.findByld(0));
+        assertEquals(null,repository.findByld(0));
     }
 
     @Test
     public void testFindBook() {
-        ProductManager productManager = new ProductManager(repository);
         productManager.add(book);
         productManager.add(book2);
         productManager.add(book1);
@@ -66,7 +66,6 @@ public class ProductManagerTest {
 
     @Test
     void testTwoMore() {
-        ProductManager productManager = new ProductManager(repository);
         book.setName("2");
         book1.setName("2");
         productManager.add(book);
