@@ -6,7 +6,7 @@ import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
     private ProductRepository repository;
-    private Product[] result = new Product[0];
+
 
     public ProductManager(ProductRepository repository) {
         this.repository = repository;
@@ -22,28 +22,25 @@ public class ProductManager {
 
     }
 
-    public Product[] getResult() {
-        return result;
-    }
 
     public Product[] searchBy(String text) {
 
+        Product[] result = new Product[0];
         for (Product product : repository.findAll()) {
             if (matches(product, text)) {
-               addFind(product);
+                int length = result.length + 1;
+                Product[] tmp = new Product[length];
+                System.arraycopy(result, 0, tmp, 0, result.length);
+                int lastIndex = tmp.length - 1;
+                tmp[lastIndex] = result[result.length];
+                result = tmp;
             }
         }
+
         return result;
 
     }
-   private void addFind(Product item) {
-        int length = result.length + 1;
-        Product[] tmp = new Product[length];
-        System.arraycopy(result, 0, tmp, 0, result.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        result = tmp;
-    }
+
 
     // метод определения соответствия товара product запросу search
     public boolean matches(Product product, String search) {

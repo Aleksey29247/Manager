@@ -30,8 +30,8 @@ public class ProductManagerTest {
         productManager.add(book1);
         productManager.add(smartphone);
         productManager.add(produkt1);
-        Product[] expected=productManager.getResult();
-        assertArrayEquals(expected, productManager.searchBy("0"));
+        Product[] products=new Product[0];
+       assertArrayEquals(products, productManager.searchBy("0"));
 
     }
 
