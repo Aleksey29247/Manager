@@ -30,6 +30,6 @@ public class Book extends Product {
 
     @Override
     public int hashCode() {
-         return Objects.hash(super.hashCode(), author);
+        return Objects.hash(super.hashCode(), author);
     }
 }

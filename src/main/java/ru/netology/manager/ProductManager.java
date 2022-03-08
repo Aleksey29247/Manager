@@ -13,10 +13,6 @@ public class ProductManager {
 
     }
 
-    public ProductManager() {
-        this.repository = new ProductRepository();
-    }
-
     public void add(Product pr) {
         repository.add(pr);
 
@@ -28,11 +24,10 @@ public class ProductManager {
         Product[] result = new Product[0];
         for (Product product : repository.findAll()) {
             if (matches(product, text)) {
-                int length = result.length + 1;
-                Product[] tmp = new Product[length];
+                Product[] tmp = new Product[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 int lastIndex = tmp.length - 1;
-                tmp[lastIndex] = result[result.length];
+                tmp[lastIndex] = product;
                 result = tmp;
             }
         }
@@ -41,16 +36,13 @@ public class ProductManager {
 
     }
 
-
-    // метод определения соответствия товара product запросу search
     public boolean matches(Product product, String search) {
         if (product.getName().contains(search)) {
             return true;
         } else {
             return false;
         }
-        // или в одну строку:
-        // return product.getName().contains(search);
+
     }
 
 }

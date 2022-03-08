@@ -18,12 +18,6 @@ public class ProductRepository {
         return items;
 
     }
-    public int getItemsLength()
-    {
-        if (items.length==0)
-        {return 0;}
-        return items.length;
-    }
 
     public Product findByld(int id) {
         for (Product item : items) {
